@@ -3,7 +3,7 @@
 This is one of a suite of terraform related actions - find them at [dflook/terraform-github-actions](https://github.com/dflook/terraform-github-actions).
 
 This actions generates a terraform plan.
-If the action is run on `pull_request` events it will add a comment on the PR containing the generated plan.
+If the triggering event relates to a PR it will add a comment on the PR containing the generated plan.
 
 <p align="center">
     <img src="plan.png" width="600">
@@ -111,6 +111,8 @@ The [dflook/terraform-apply](https://github.com/dflook/terraform-github-actions/
 
 ## Example usage
 
+### Automatically generating a plan
+
 This example workflow runs on every push to an open pull request,
 and create or updates a comment with the terraform plan
 
@@ -128,6 +130,36 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: terraform plan
+        uses: dflook/terraform-plan@v1
+        with:
+          path: my-terraform-config
+```
+
+### Generating a plan using a comment
+
+This workflow generates a plan on demand, triggered by someone
+commenting `terraform plan` on the PR. The action will create or update
+a comment on the PR with the generated plan.
+
+```yaml
+name: Terraform Plan
+
+on: [issue_comment]
+
+jobs:
+  plan:
+    if: github.event.issue.pull_request && contains(github.event.comment.body, 'terraform plan')
+    runs-on: ubuntu-latest
+    name: Create terraform plan
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: refs/pull/${{ github.event.issue.number }}/merge
 
       - name: terraform plan
         uses: dflook/terraform-plan@v1

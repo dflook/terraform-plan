@@ -100,7 +100,47 @@ The [dflook/terraform-apply](https://github.com/dflook/terraform-github-actions/
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   ```
-  
+
+  - Type: string
+  - Optional
+
+* `TERRAFORM_CLOUD_TOKENS`
+
+  API tokens for terraform cloud hosts, of the form `<host>=<token>`. Multiple tokens may be specified, one per line.
+  These tokens may be used with the `remote` backend and for fetching required modules from the registry.
+
+  e.g for terraform cloud:
+  ```yaml
+  env:
+    TERRAFORM_CLOUD_TOKENS: app.terraform.io=${{ secrets.TF_CLOUD_TOKEN }}
+  ```
+
+  With Terraform Enterprise or other registries:
+  ```yaml
+  env:
+    TERRAFORM_CLOUD_TOKENS: |
+      app.terraform.io=${{ secrets.TF_CLOUD_TOKEN }}
+      terraform.example.com=${{ secrets.TF_REGISTRY_TOKEN }}
+  ```
+
+  - Type: string
+  - Optional
+
+* `TERRAFORM_SSH_KEY`
+
+  A SSH private key that terraform will use to fetch git module sources.
+
+  This should be in PEM format.
+
+  For example:
+  ```yaml
+  env:
+    TERRAFORM_SSH_KEY: ${{ secrets.TERRAFORM_SSH_KEY }}
+  ```
+
+  - Type: string
+  - Optional
+
 * `TF_PLAN_COLLAPSE_LENGTH`
 
   When PR comments are enabled, the terraform output is included in a collapsable pane.
@@ -113,6 +153,7 @@ The [dflook/terraform-apply](https://github.com/dflook/terraform-github-actions/
     TF_PLAN_COLLAPSE_LENGTH: 30
   ```
 
+  - Type: integer
   - Optional
   - Default: 10
 

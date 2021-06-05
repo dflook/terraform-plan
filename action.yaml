@@ -11,7 +11,7 @@ inputs:
     required: false
     default: default
   backend_config:
-    description: Comma separated list of backend config values to set, e.g. 'foo=bar'
+    description: List of backend config values to set, one per line
     required: false
   backend_config_file:
     description: Path to a backend config file
@@ -24,7 +24,7 @@ inputs:
     required: false
     deprecationMessage: Use the variables input instead.
   var_file:
-    description: Comma separated list of var file paths
+    description: List of var file paths, one per line
     required: false
   parallelism:
     description: Limit the number of concurrent operations
@@ -45,7 +45,7 @@ outputs:
 
 runs:
   using: docker
-  image: docker://danielflook/terraform-github-actions:v1.10.0
+  image: docker://danielflook/terraform-github-actions@sha256:4249a9c33cb8c97461daf001145885c17fdde1ba297dbd1d6c11b6f37c3b1eb9
   entrypoint: /entrypoints/plan.sh
 
 branding:

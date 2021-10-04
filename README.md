@@ -163,6 +163,13 @@ The [dflook/terraform-apply](https://github.com/dflook/terraform-github-actions/
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   ```
 
+  The token provided by GitHub Actions will work with the default permissions.
+  The minimum permissions are `pull-requests: write`.
+  It will also likely need `contents: read` so the job can checkout the repo.
+
+  You can also use a Personal Access Token which has the `repo` scope.
+  The GitHub user that owns the PAT will be the PR comment author.
+
   - Type: string
   - Optional
 
@@ -250,7 +257,7 @@ The [dflook/terraform-apply](https://github.com/dflook/terraform-github-actions/
   
   The runtime environment for these actions is subject to change in minor version releases. If using this environment variable, specify the minor version of the action to use.
   
-  The runtime image is currently based on `debian:buster`, with the command run using `bash -xeo pipefail`.
+  The runtime image is currently based on `debian:bullseye`, with the command run using `bash -xeo pipefail`.
 
   For example:
   ```yaml
@@ -275,6 +282,19 @@ The [dflook/terraform-apply](https://github.com/dflook/terraform-github-actions/
   Note that with terraform <0.13 an apply may still be needed to update any outputs, even if no
   resources would change. With terraform >=0.13 this is correctly set to 'true' whenever an apply
   needs to be run.
+
+* `json_plan_path`
+
+  This is the path to the generated plan in [JSON Output Format](https://www.terraform.io/docs/internals/json-format.html)
+  The path is relative to the Actions workspace.
+
+  This is not available when using terraform 0.11 or earlier.
+  This also won't be set if the backend type is `remote` - Terraform does not support saving remote plans.
+
+* `text_plan_path`
+
+  This is the path to the generated plan in a human readable format.
+  The path is relative to the Actions workspace.
 
 ## Example usage
 

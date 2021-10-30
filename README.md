@@ -9,7 +9,7 @@ If the triggering event relates to a PR it will add a comment on the PR containi
     <img src="plan.png" width="600">
 </p>
 
-The `GITHUB_TOKEN` environment variable is must be set for the PR comment to be added.
+The `GITHUB_TOKEN` environment variable must be set for the PR comment to be added.
 The action can be run on other events, which prints the plan to the workflow log.
 
 The [dflook/terraform-apply](https://github.com/dflook/terraform-github-actions/tree/master/terraform-apply) action can be used to apply the generated plan.
@@ -18,7 +18,7 @@ The [dflook/terraform-apply](https://github.com/dflook/terraform-github-actions/
 
 * `path`
 
-  Path to the terraform configuration
+  Path to the terraform root module to apply
 
   - Type: string
   - Optional
@@ -34,7 +34,7 @@ The [dflook/terraform-apply](https://github.com/dflook/terraform-github-actions/
 
 * `label`
 
-  An friendly name for the environment the terraform configuration is for.
+  A friendly name for the environment the terraform configuration is for.
   This will be used in the PR comment for easy identification.
 
   If set, must be the same as the `label` used in the corresponding `terraform-apply` command.
@@ -106,13 +106,35 @@ The [dflook/terraform-apply](https://github.com/dflook/terraform-github-actions/
   - Type: string
   - Optional
 
-* `parallelism`
+* `replace`
 
-  Limit the number of concurrent operations
+  List of resources to replace, one per line.
 
-  - Type: number
+  Only available with terraform versions that support replace (v0.15.2 onwards).
+
+  ```yaml
+  with:
+    replace: |
+      random_password.database
+  ```
+
+  - Type: string
   - Optional
-  - Default: 10
+
+* `target`
+
+  List of resources to apply, one per line.
+  The plan will be limited to these resources and their dependencies.
+
+  ```yaml
+  with:
+    target: |
+      kubernetes_secret.tls_cert_public
+      kubernetes_secret.tls_cert_private
+  ```
+
+  - Type: string
+  - Optional
 
 * `add_github_comment`
 
@@ -123,6 +145,14 @@ The [dflook/terraform-apply](https://github.com/dflook/terraform-github-actions/
   - Type: string
   - Optional
   - Default: true
+
+* `parallelism`
+
+  Limit the number of concurrent operations
+
+  - Type: number
+  - Optional
+  - Default: The terraform default (10)
 
 * ~~`var`~~
 

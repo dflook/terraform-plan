@@ -30,7 +30,7 @@ inputs:
   parallelism:
     description: Limit the number of concurrent operations
     required: false
-    default: 0
+    default: "0"
   target:
     description: List of resources to target for the plan, one per line
     required: false
@@ -46,7 +46,7 @@ inputs:
   add_github_comment:
     description: Add the plan to a GitHub PR
     required: false
-    default: true
+    default: "true"
 
 outputs:
   changes:
@@ -58,7 +58,7 @@ outputs:
 
 runs:
   using: docker
-  image: docker://danielflook/terraform-github-actions@sha256:8b46c7ad82dfec8404f73e34ad8010ad05eb043977823f61b500a5800e6b90dc
+  image: docker://danielflook/terraform-github-actions@sha256:4fec008558a518785e1ac10e1f601a584d2642a013e871f2c50134f7ed14f361
   entrypoint: /entrypoints/plan.sh
 
 branding:

@@ -14,9 +14,11 @@ inputs:
   backend_config:
     description: List of backend config values to set, one per line
     required: false
+    default: ""
   backend_config_file:
     description: Path to a backend config file
     required: false
+    default: ""
   variables:
     description: Variable definitions
     required: false
@@ -58,7 +60,7 @@ outputs:
 
 runs:
   using: docker
-  image: docker://danielflook/terraform-github-actions@sha256:4fec008558a518785e1ac10e1f601a584d2642a013e871f2c50134f7ed14f361
+  image: docker://danielflook/terraform-github-actions@sha256:a25c8c9a7817813abccf86210092c7ed0e47ef183c4b17611b16e574e5340761
   entrypoint: /entrypoints/plan.sh
 
 branding:

@@ -53,6 +53,12 @@ inputs:
 outputs:
   changes:
     description: If the generated plan would update any resources or outputs this is set to `true`, otherwise it's set to `false`.
+  to_add:
+    description: The number of resources that would be added by this plan
+  to_change:
+    description: The number of resources that would be changed by this plan
+  to_destroy:
+    description: The number of resources that would be destroyed by this plan
   text_plan_path:
     description: Path to a file in the workspace containing the generated plan in human readble format.
   json_plan_path:
@@ -60,7 +66,7 @@ outputs:
 
 runs:
   using: docker
-  image: docker://danielflook/terraform-github-actions@sha256:95f8746c9f1ccc447564ca3cb4a5bf5ce918ba078832419c694114a8cd58d52e
+  image: docker://danielflook/terraform-github-actions@sha256:17751f4256104e52a4383703b7db8455cdb183cb9f0cb9d7e49e7263e87f51ff
   entrypoint: /entrypoints/plan.sh
 
 branding:

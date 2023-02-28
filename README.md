@@ -134,6 +134,16 @@ The [dflook/terraform-apply](https://github.com/dflook/terraform-github-actions/
   - Type: string
   - Optional
 
+* `destroy`
+
+  Set to `true` to generate a plan to destroy all resources.
+
+  This generates a plan in [destroy mode](https://developer.hashicorp.com/terraform/cli/commands/plan#planning-modes).
+
+  - Type: boolean
+  - Optional
+  - Default: false
+
 * `add_github_comment`
 
   The default is `true`, which adds a comment to the PR with the results of the plan.

@@ -63,6 +63,8 @@ outputs:
     description: The number of resources that would be changed by this plan
   to_destroy:
     description: The number of resources that would be destroyed by this plan
+  plan_path:
+    description: Path to a file in the workspace containing the generated plan in an opaque binary format.
   text_plan_path:
     description: Path to a file in the workspace containing the generated plan in human readable format.
   json_plan_path:
@@ -72,7 +74,7 @@ outputs:
 
 runs:
   using: docker
-  image: docker://ghcr.io/dflook/terraform-github-actions@sha256:58b279738cab51c9bb4b8201afeff9e585ce72f9a30ee0490896ad8827e7e96b
+  image: docker://ghcr.io/dflook/terraform-github-actions@sha256:4c0a6f98ddafa03699d7fb059010f6b5f88d5a8903d1d2e66660ec799de9efad
   entrypoint: /entrypoints/plan.sh
 
 branding:

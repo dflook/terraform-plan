@@ -57,7 +57,7 @@ inputs:
     default: ""
   target:
     description: |
-      List of resources to apply, one per line.
+      List of resources to target, one per line.
       The plan will be limited to these resources and their dependencies.
     required: false
     default: ""
@@ -68,6 +68,13 @@ inputs:
       This generates a plan in [destroy mode](https://developer.hashicorp.com/terraform/cli/commands/plan#planning-modes).
     required: false
     default: "false"
+  refresh:
+    description: |
+      Set to `false` to skip synchronisation of the Terraform state with actual resources.
+
+      This will make the plan faster but may be out of date with the actual resources, which can lead to incorrect plans.
+    required: false
+    default: "true"
   add_github_comment:
     description: |
       Controls whether a comment is added to the PR with the generated plan.
@@ -119,7 +126,7 @@ outputs:
 
 runs:
   using: docker
-  image: docker://ghcr.io/dflook/terraform-github-actions@sha256:7aef5fd3c9c6b005c5fe0a77b3065e5a2eeed4650993041a54c25013761237f7
+  image: docker://ghcr.io/dflook/terraform-github-actions@sha256:3b17c6aec3cf2a1f21e7ca7c7b44c50193c735c285a3d18d82d59e3f1000d3cb
   entrypoint: /entrypoints/plan.sh
 
 branding:

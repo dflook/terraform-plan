@@ -360,7 +360,7 @@ The [dflook/terraform-apply](https://github.com/dflook/terraform-github-actions/
 
   The runtime environment for these actions is subject to change in minor version releases. If using this environment variable, specify the minor version of the action to use.
 
-  The runtime image is currently based on `debian:bullseye`, with the command run using `bash -xeo pipefail`.
+  The runtime image is currently based on `debian:bookworm`, with the command run using `bash -xeo pipefail`.
 
   For example:
 
@@ -412,7 +412,7 @@ jobs:
           ref: refs/pull/${{ github.event.issue.number }}/merge
 
       - name: terraform apply
-        uses: dflook/terraform-plan@v1
+        uses: dflook/terraform-plan@v2
         with:
           path: my-terraform-config
 ```
@@ -462,7 +462,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: terraform plan
-        uses: dflook/terraform-plan@v1
+        uses: dflook/terraform-plan@v2
         with:
           path: my-terraform-config
 ```
@@ -499,7 +499,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: terraform plan
-        uses: dflook/terraform-plan@v1
+        uses: dflook/terraform-plan@v2
         with:
           path: my-terraform-config
           label: production
@@ -540,7 +540,7 @@ jobs:
           ref: refs/pull/${{ github.event.issue.number }}/merge
 
       - name: terraform plan
-        uses: dflook/terraform-plan@v1
+        uses: dflook/terraform-plan@v2
         with:
           path: my-terraform-config
 ```

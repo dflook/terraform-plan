@@ -115,7 +115,7 @@ outputs:
 
 runs:
   using: docker
-  image: docker://ghcr.io/dflook/terraform-github-actions@sha256:5bdd47d526c0770b32f11f395c953d5bb06aa77ea4cb8818c4cda6167a0018cc
+  image: docker://ghcr.io/dflook/terraform-github-actions@sha256:5d8cfe89eb83d6527ad4fe2c48462241d1f17e4d71ca6446806b857cff08f9cf
   entrypoint: /entrypoints/plan.sh
 
 branding:
